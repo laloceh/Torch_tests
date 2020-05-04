@@ -1,0 +1,11 @@
+*.pk
+*.pkl
+*.pt
+FromPytorchDocs/cifar_net.pth
+
+ml-100k/
+glove.6B/
+FromPytorchDocs/data/
+kaggle/torchtext_data/
+.idea/
+
