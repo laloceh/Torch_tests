@@ -1,8 +1,10 @@
 *.pk
 *.pkl
 *.pt
+*.txt
 FromPytorchDocs/cifar_net.pth
 
+word2vec_model/
 ml-100k/
 glove.6B/
 FromPytorchDocs/data/
