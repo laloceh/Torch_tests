@@ -1,3 +1,4 @@
+*.data
 *.pk
 *.pkl
 *.pt
