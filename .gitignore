@@ -1,3 +1,4 @@
+*..weights
 *.pth
 *.data
 *.pk
@@ -5,6 +6,7 @@
 *.pt
 *.txt
 FromPytorchDocs/cifar_net.pth
+myNCF/best.weights
 
 word2vec_model/
 ml-100k/
