@@ -39,15 +39,22 @@ class Attention(nn.Module):
             query = self.linear_in(query)
             query = query.reshape(batch_size, output_len, dimensions)
 
+        # 1. Compute a score for each encoder state
         attention_scores = torch.bmm(query, context.transpose(1,2).contiguous())
 
-        # Compute weights accros every context sequence
+        # Compute weights across every context sequence
         attention_scores = attention_scores.view(batch_size * output_len, query_len)
+        print("ATT SCORES")
+        print(attention_scores.size())
+
+        # 2. Compute the attention weights
         attention_weights = self.softmax(attention_scores)
         attention_weights = attention_weights.view(batch_size, output_len, query_len)
 
+        # 3. Compute the new context vector S
         mix = torch.bmm(attention_weights, context)
 
+        # 4. Concatenate context vector with output of previous time step
         combined = torch.cat((mix, query), dim=2)
         combined = combined.view(batch_size * output_len, 2 * dimensions)
 
@@ -55,7 +62,7 @@ class Attention(nn.Module):
         output = self.linear_out(combined).view(batch_size, output_len, dimensions)
         output = self.tanh(output)
 
-        return output, attention_weights
+        return mix, output, attention_weights
 
 #%%
 
@@ -64,13 +71,22 @@ if __name__ == "__main__":
     query = torch.randn(5, 1, 7)    # puede ser el embedding del usuario?
     context = torch.randn(5, 6, 7)
 
+    print("~~~~ QUERY SIZE (user / item embedding) ~~~~")
+    print(query.size())
+    print("**** QUERY ****")
     print(query)
-    print("@" * 50)
+
+    print("@@@@ CONTEXT (sentence embedding) @@@@")
+    print(context.size())
+    print("^^^^ CONTEXT ^^^^")
     print(context)
 
 
-    output, weight = attention(query, context)
+    mix, output, weight = attention(query, context)
+    print("!!!! OUTPUT SIZE (context S) !!!!")
     print(output.size())
+
+    print("%%%% WEIGHT SIZE (weight for each word in sentence) %%%%")
     print(weight.size())
 
     """
@@ -81,10 +97,17 @@ if __name__ == "__main__":
     print(res.size())
     """
 
-    print("Output~~~~`")
+    print("OUTPUT~~~~`")
     print(output)
-    print("~~~Weigth")
+    print("~~~WEIGHT")
     print(weight)
+    print("$$$$ WEIGHT SUM $$$$")
+    print(torch.sum(weight, dim=2))
+
+    print("&&&& MIX SIZE &&&&")
+    print(mix.size())
+    print("&&&& MIX &&&&")
+    print(mix)
 
 
 

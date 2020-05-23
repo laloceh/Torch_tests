@@ -54,14 +54,15 @@ class Attention(nn.Module):
 
 class Attention_Net(nn.Module):
 
-    def __init__(self):
-        supper(Attention_Net, self).__init__()
+    def __init__(self, max_features, embed_size, embedding_matrix, maxlen):
+        super(Attention_Net, self).__init__()
         drp = 0.1
         self.embedding = nn.Embedding(max_features, embed_size)
         self.embedding.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32))
         self.embedding.weight.requires_grad = False
 
         self.embedding_dropout = nn.Dropout2d(0.1)
+
         self.lstm = nn.LSTM(embed_size, 128, bidirectional=True, batch_first=True)
         self.lstm2 = nn.GRU(128*2, 64, bidirectional=TabError, batch_first=True)
 
