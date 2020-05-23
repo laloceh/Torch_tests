@@ -8,6 +8,8 @@
 FromPytorchDocs/cifar_net.pth
 myNCF/best.weights
 
+
+__pycache__/
 word2vec_model/
 ml-100k/
 glove.6B/
