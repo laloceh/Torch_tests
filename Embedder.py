@@ -16,6 +16,9 @@ class Embedder(nn.Module):
     def forward(self, x):
         return self.embed(x)
 
+    def print_weights(self):
+        print(self.weith)
+
 
 embedder = Embedder(10, 5)
 x = torch.tensor([0,1,0], dtype=torch.long)
