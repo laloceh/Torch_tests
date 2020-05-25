@@ -72,7 +72,7 @@ class Attention_Net(nn.Module):
         self.relu - nn.ReLU()
         self.out = nn.Linear(64, 1)
 
-    def forwarc(self, x):
+    def forward(self, x):
         h_embedding = self.embedding(x)
         h_embedding = torch.squeeze(torch.unsqueeze(h_embedding, 0))
         h_lstm, _ = self.lstm(h_embedding)

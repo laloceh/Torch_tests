@@ -68,7 +68,7 @@ class Attention(nn.Module):
 
 if __name__ == "__main__":
     attention = Attention(7, "dot")
-    query = torch.randn(5, 1, 7)    # puede ser el embedding del usuario?
+    query = torch.randn(5, 1, 7)    # puede ser el embedding del usuario???
     context = torch.randn(5, 6, 7)
 
     print("~~~~ QUERY SIZE (user / item embedding) ~~~~")
