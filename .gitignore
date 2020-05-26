@@ -5,6 +5,7 @@
 *.pkl
 *.pt
 *.txt
+*.csv
 FromPytorchDocs/cifar_net.pth
 myNCF/best.weights
 
