@@ -17,7 +17,7 @@ class Embedder(nn.Module):
         return self.embed(x)
 
     def print_weights(self):
-        print(self.weith)
+        print(self.weigth)
 
 
 embedder = Embedder(10, 5)
